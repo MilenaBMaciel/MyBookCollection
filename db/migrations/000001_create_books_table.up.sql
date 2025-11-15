@@ -4,5 +4,5 @@ CREATE TABLE books(
     language VARCHAR(128) NOT NULL,
     category VARCHAR(128) NOT NULL,
     bought_by VARCHAR(255),
-    read_by VARCHAR(255),
+    read_by VARCHAR(255)
 );

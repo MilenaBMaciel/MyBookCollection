@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: My Book Collection API
+  version: 1.0.0
+
+paths:
+  /books:
+    post:
+      summary: Cria um livro
+      operationId: PostBook
+      requestBody:
+        $ref: "#/components/requestBodies/BookCreate"
+      responses:
+        '201':
+          description: Created
+
+components:
+  schemas:
+    Book:
+      description: test response
+      type: object
+      required: 
+        - id
+        - title
+        - author
+        - language
+        - category
+        - bought_by
+        - read_by
+      properties:
+        id:
+          type: string
+        title: 
+          type: string
+        author:
+          type: string
+        language:
+          type: string
+        category:
+          type: string
+        bought_by:
+          type: string
+        read_by:
+          type: string
+  requestBodies:
+    BookCreate:
+      description: new book information
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: 
+              - title
+              - author
+              - language
+              - category
+              - bought_by
+              - read_by
+            properties:
+              title: 
+                type: string
+              author:
+                type: string
+              language:
+                type: string
+              category:
+                type: string
+              bought_by:
+                type: string
+              read_by:
+                type: string

@@ -5,4 +5,5 @@ sql:
     schema: db/migrations
     gen:
       go:
+        out: db/sqlc
         package: sqlc

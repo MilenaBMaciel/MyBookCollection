@@ -6,6 +6,6 @@ type Book struct{
     Author string
     Language string
     Category string
-    Bought_by string
-    Read_by string
+    BoughtBy string
+    ReadBy string
 }

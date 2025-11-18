@@ -16,7 +16,29 @@ func (h *PostgresHandler) PostBook(ctx context.Context, book entity.Book) error{
 		Author: book.Author,
 		Category: book.Category,
 		Lang: book.Language,
-		BoughtBy: book.Bought_by,
-		ReadBy: utils.ToNullString(book.Read_by),
+		BoughtBy: book.BoughtBy,
+		ReadBy: utils.ToNullString(book.ReadBy),
 	})
+}
+
+func (h *PostgresHandler) GetBooks(ctx context.Context)([]entity.Book, error){
+	dbBook, err := h.queries.GetBooks(ctx)
+	if err != nil || len(dbBook)<=0{
+		return nil, err
+	}
+
+	var books []entity.Book = make([]entity.Book, len(dbBook))
+
+	for i, book := range dbBook{
+		books[i] = entity.Book{
+			ID: book.ID,
+			Title: book.Title,
+			Author: book.Author,
+			Language: book.Lang,
+			Category: book.Category,
+			BoughtBy: book.BoughtBy,
+			ReadBy: utils.FromNullStr(book.ReadBy),
+		}
+	}
+	return books, nil
 }

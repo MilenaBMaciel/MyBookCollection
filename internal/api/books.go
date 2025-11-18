@@ -13,8 +13,8 @@ func (h *Handler) PostBook(ctx context.Context, req *openapi.PostBookReq) error{
 		Author: req.Author,
 		Language: req.Language,
 		Category: req.Category,
-		Bought_by: req.BoughtBy,
-		Read_by: req.ReadBy,
+		BoughtBy: req.BoughtBy,
+		ReadBy: req.ReadBy,
 		ID: "1",
 	}
 	err := h.booksHandler.PostBook(ctx, book)
@@ -24,4 +24,26 @@ func (h *Handler) PostBook(ctx context.Context, req *openapi.PostBookReq) error{
 
 	return nil
 
+}
+
+func (h *Handler) GetBooks(ctx context.Context) ([]openapi.Book, error){
+	books, err := h.booksHandler.GetBooks(ctx)
+	if err != nil{
+		return nil, err
+	}
+
+	resBooks := make([]openapi.Book, len(books))
+
+	for i, book := range books {
+		resBooks[i] = openapi.Book{
+			ID: book.ID,
+			Title: book.Title,
+			Author: book.Author,
+			Language: book.Language,
+			Category: book.Category,
+			BoughtBy: book.BoughtBy,
+			ReadBy: book.ReadBy,
+		}
+	}
+	return resBooks, nil
 }

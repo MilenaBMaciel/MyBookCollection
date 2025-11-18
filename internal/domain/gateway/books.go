@@ -8,4 +8,5 @@ import (
 
 type Books interface {
 	PostBook(context.Context, entity.Book) error
+	GetBooks(context.Context) ([]entity.Book, error)
 }

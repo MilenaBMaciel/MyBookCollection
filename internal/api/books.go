@@ -15,7 +15,6 @@ func (h *Handler) PostBook(ctx context.Context, req *openapi.PostBookReq) error{
 		Category: req.Category,
 		BoughtBy: req.BoughtBy,
 		ReadBy: req.ReadBy,
-		ID: "1",
 	}
 	err := h.booksHandler.PostBook(ctx, book)
 	if err != nil{
@@ -46,4 +45,21 @@ func (h *Handler) GetBooks(ctx context.Context) ([]openapi.Book, error){
 		}
 	}
 	return resBooks, nil
+}
+
+func (h *Handler) UpdateBook(ctx context.Context, req *openapi.UpdateBookReq, params openapi.UpdateBookParams) error{
+	book := entity.Book{
+		ID: params.ID,
+		Title: req.Title,
+		Author: req.Author,
+		Language: req.Language,
+		Category: req.Category,
+		BoughtBy: req.BoughtBy,
+		ReadBy: req.ReadBy,
+	}
+	return h.booksHandler.UpdateBook(ctx, book)
+}
+
+func (h *Handler) DeleteBook(ctx context.Context, params openapi.DeleteBookParams) error{
+	return h.booksHandler.DeleteBook(ctx, entity.Book{ID: params.ID})
 }

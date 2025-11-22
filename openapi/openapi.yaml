@@ -26,7 +26,28 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
-
+  /books/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        descripton: Book ID
+    delete:
+      summary: Deleta o livro pelo ID
+      operationId: DeleteBook
+      responses:
+        '204':
+          description: No Content
+    patch:
+      summary: Atualiza livro pelo ID
+      operationId: UpdateBook
+      requestBody:
+        $ref: "#/components/requestBodies/BookCreate"
+      responses:
+        '204':
+          description: No Content
 components:
   schemas:
     Book:
